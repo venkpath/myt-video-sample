@@ -1,0 +1,66 @@
+<!-- Header -->
+<header id="header">
+    <div class="inner">
+        <a href="video-stream.html" class="logo"><strong>Video</strong> Chat</a>
+
+        <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+    </div>
+</header>
+
+<!-- Banner -->
+<section id="banner">
+    <div class="inner">
+        <header>
+            <h1>Welcome to Video Conference</h1>
+        </header>
+
+        <div class="flex ">
+
+            <div>
+
+                <input placeholder="Enter Meeting Id" id="txt-roomid" (input)="meetingId=$event.target.value"> 
+
+            </div>
+
+            <div>
+
+                <input placeholder="Enter User Name" id="txt-user-name" (input)="userName=$event.target.value">
+            </div>
+
+
+
+        </div>
+        <div id="confirm-box-topper" *ngIf ="showConfirmBox"
+            style="display:none;z-index:99999999;top:0;left:0;bottom:0;right:0;width:100%;height:100%;position:fixed;background:#000000ad;">
+        </div>
+        <div id="alert-box" class="modal fade" style="display:none;z-index:999999999999999;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="alert-title">{{alertTitle}}</h5>
+                        <button type="button" class="close btn-alert-close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="alert-message" class="model-list">{{alertMessage}}</div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <p id="alert-special">{{alertSpecial}}</p>
+                        <button class="btn btn-primary btn-alert-close">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <footer>
+
+
+            <a href="javascript:void(0)" id="btn-create-room" (click)='btnCreate($event)' class="button">Open Room</a>
+
+            <a href="javascript:void(0)" id="btn-join-hidden-room" (click)='btnJoinHiddenRoom($event)'class="button">Join Room</a>
+        </footer>
+    </div>
+</section>

@@ -1,1 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+@import '../src/assets/css/main.css';
+@import '../src/assets/css/font-awesome.min.css';
+@import '../src/assets/css/bootstrap.min.css';
+@import '../src/assets/css/emojionearea.min.css';
+@import '../src/assets/css/agency.css';
