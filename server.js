@@ -260,9 +260,10 @@ if (isUseHTTPs) {
             pfx: sslKey
         };
     }
-
+console.log('createserver');
     httpApp = httpServer.createServer(options, serverHandler);
 } else {
+  console.log('createserver1');
     httpApp = httpServer.createServer(serverHandler);
 }
 
