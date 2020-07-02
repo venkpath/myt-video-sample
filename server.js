@@ -268,8 +268,8 @@ if (isUseHTTPs) {
 }
 
 RTCMultiConnectionServer.beforeHttpListen(httpApp, config);
-httpApp = httpApp.listen(process.env.PORT || PORT, "3.218.37.101" || "0.0.0.0", function() {
-    
+httpApp = httpApp.listen(process.env.PORT || PORT, process.env.HOST || "0.0.0.0", function() {
+    console.log(process.env.HOST);
     RTCMultiConnectionServer.afterHttpListen(httpApp, config);
 });
 
