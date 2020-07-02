@@ -276,7 +276,7 @@ httpApp = httpApp.listen(process.env.PORT || PORT, process.env.IP || "0.0.0.0", 
 
 ioServer(httpApp).on('connection', function(socket) {
     RTCMultiConnectionServer.addSocket(socket, config);
-
+console.logt('prasanth');
     // ----------------------
     // below code is optional
 
@@ -287,6 +287,7 @@ ioServer(httpApp).on('connection', function(socket) {
     }
 
     socket.on(params.socketCustomEvent, function(message) {
+      console.logt('prasanth1');
         socket.broadcast.emit(params.socketCustomEvent, message);
     });
 });
