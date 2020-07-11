@@ -32,7 +32,33 @@ function myjsapp(peerClient) {
             document.cookie = name + "=; expires=" + date.toGMTString() + "; path=/";
         }
     };
+    const queryString = window.location.search;
 
+    const urlParams = new URLSearchParams(queryString);
+var urlUserName = urlParams.get('id');
+var username;
+if(urlUserName && JSON. parse(localStorage.getItem("currentUser1")) &&JSON. parse(localStorage.getItem("currentUser2"))){
+    if(urlUserName=='prasanth'&& urlUserName == JSON. parse(localStorage.getItem("currentUser1"))['username']){
+        username = JSON. parse(localStorage.getItem("currentUser1"))['username'];
+        if(urlUserName != username){
+            startPeerClient(username)
+        }
+    }else if(urlUserName=='yogi'&& urlUserName == JSON. parse(localStorage.getItem("currentUser2"))['username']){
+        username = JSON. parse(localStorage.getItem("currentUser2"))['username'];
+        if(urlUserName != username){
+            startPeerClient(username)
+        }
+    }else{
+        var href = location.href+'/login';
+window.open('http://localhost:4200/login?returnUrl=%2F','_self')
+
+    }
+    
+}else{
+    var href = location.href+'/login';
+window.open('http://localhost:4200/login?returnUrl=%2F','_self')
+}
+    
     function EventListeners() {
         $('#peer-id').tooltip()
 
@@ -106,11 +132,7 @@ function myjsapp(peerClient) {
         })
 
         
-        $('.create-room').click(function (event) {
-            var href = location.href + '/group';
-    window.open(href,'_blank');
-            
-        })
+       
 
         $('.accept-call').click(function (event) {
             // End established call
@@ -203,12 +225,13 @@ function myjsapp(peerClient) {
     }
 
     // Show Username Modal
-    var username = cookie.get('username');
+    //var username = JSON. parse(localStorage.getItem("currentUser1"))['username'];
     if(username) {
         $('#user-name').val(username)
         startPeerClient(username)
     } else {
-        $('#getUserNameModal').modal('show')
+        window.open("localhost:4200/login");
+
     }
 
     EventListeners();        
@@ -233,7 +256,7 @@ function myjsapp(peerClient) {
             var callButton = $('<a class="portfolio-link">');
             var videoCall = $('<i class="fa fa-video-camera fa-2x call-icon" aria-hidden="true"></i>');
             var audioCall = $('<i class="fa fa-phone fa-2x call-icon" aria-hidden="true"></i></a>');
-           var screenShare =  $('.screen-share');
+        //    var screenShare =  $('.screen-share');
     
             callButton.append(audioCall).append(videoCall);
 
@@ -297,9 +320,9 @@ function myjsapp(peerClient) {
                 return false
             })
 
-            screenShare.click(function (event) {
-                peerClient.screenShare(toPeerId);
-            })
+            // screenShare.click(function (event) {
+                //peerClient.screenShare(toPeerId);
+            // })
             // TODO - Hide panels if more than 3
         },
 

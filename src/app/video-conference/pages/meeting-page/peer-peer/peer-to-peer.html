@@ -1,6 +1,6 @@
 <nav class="navbar navbar-toggleable-sm navbar-inverse fixed-top bg-inverse">
     <a class="navbar-brand" href="/">Video chat App</a>
-    <button type="button"  class="btn btn-primary create-room">Create Room</button>
+    <button type="button"  class="btn btn-primary create-room" (click)="createRoom($event)">Create Room</button>
 </nav>
 
 <section id="chat-app">
@@ -66,7 +66,7 @@
                                 <button type="button" class="btn btn-secondary mute-audio ml-3 mt-2"><i class="fa fa-microphone-slash"></i>Mute Audio</button>
                                 <button type="button" class="btn btn-secondary mute-video ml-3 mt-2"><i class="fa fa-video-camera"></i>Mute Video</button>
                                 <button type="button" class="btn btn-danger end-call ml-3 mt-2" data-dismiss="modal"><i class="fa fa-times"></i>End Call</button>
-                                <button type="button" class="btn btn-danger screen-share ml-3 mt-2" data-dismiss="modal"><i class="fa fa-times"></i>Screen Share</button>
+                                <!-- <button type="button" class="btn btn-danger screen-share ml-3 mt-2" data-dismiss="modal"><i class="fa fa-times"></i>Screen Share</button> -->
                             </div>
                         </div>
                     </div>
@@ -76,23 +76,6 @@
     </div>
 </div>
 
-<div class="modal" id="getUserNameModal" tabindex="-1" role="dialog" data-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop='static'>
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Enter your Name</h5>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="user-name">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-primary username-done">Done</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Modal -->
 <div class="modal" id="callConfirmationModal" tabindex="-1" role="dialog" data-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop='static'>

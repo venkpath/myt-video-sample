@@ -30,6 +30,7 @@ export class MeetingPageComponent implements AfterViewInit {
     password:string;
     progressHelper = {};
     userFullName:string;
+    
     sessionId:string;
     publicRoomIdentifier:string;
     screenViewerDisplay:boolean = true;;
@@ -56,15 +57,29 @@ export class MeetingPageComponent implements AfterViewInit {
     callDuration;
 params:any;
     constructor(private route: ActivatedRoute,private renderer: Renderer2, private el: ElementRef) {
+       
         console.log('Called Constructor');
         this.route.queryParams.subscribe(params => {
-           
-            this.userFullName = params['userFullName'];
-            this.publicRoomIdentifier = params['publicRoomIdentifier'];
-            this.sessionId = params['sessionid'];
-            this.open = params['open'];
-            this.password = params['password'];
-            this.timer  = params['time'];
+            // if(JSON. parse(localStorage.getItem("currentUser1"))){
+            //     if(params['userFullName'] == JSON. parse(localStorage.getItem("currentUser1"))['username']
+            //         ||params['userFullName'] == JSON. parse(localStorage.getItem("currentUser2"))['username']){
+                        this.userFullName = params['userFullName'];
+                        this.publicRoomIdentifier = params['publicRoomIdentifier'];
+                        this.sessionId = params['sessionid'];
+                        this.open = params['open'];
+                        this.password = params['password'];
+                        this.timer  = params['time'];
+                    // }else{
+                    //     var href = location.href+'/login';
+                    //      window.open('http://localhost:4200/login?returnUrl=%2F','_self')
+    
+                    // }
+            // }else{
+            //     var href = location.href+'/login';
+            //      window.open('http://localhost:4200/login?returnUrl=%2F','_self')
+
+            // }
+            
         });
     }
     ngAfterViewInit() {
@@ -238,7 +253,7 @@ params:any;
     this.connection.videosContainer  = this.otherVideos.nativeElement;
     this.connection.mainVideoContainer  = this.mainVideo.nativeElement;
     this.connection.onstream = (event)=> {
-        this.startTimer(this.callDuration);
+        //this.startTimer(this.callDuration);
         var existing = document.getElementById(event.streamid);
     if(existing && existing.parentNode) {
       existing.parentNode.removeChild(existing);
@@ -269,7 +284,15 @@ params:any;
             video.setAttribute('data-streamid', event.streamid);
             video.width="700"
         }
-        video.controls = true;
+        if(this.open == 'true'){
+            video.controls = true;
+        }else{
+            
+                video.controls = false;
+            
+            
+        }
+        
             video.srcObject = event.stream;
             var width = 250;
         var mediaElement = getHTMLMediaElement(video, {
@@ -302,8 +325,17 @@ params:any;
             video.setAttribute('id', event.streamid);
             video.setAttribute('class', 'other-video-element');
         }
-    
-        video.controls = true;
+        if(this.open == 'true'){
+            video.controls = true;
+        }else{
+            if(event.extra.userFullName == this.userFullName){
+                video.controls = true;
+            }else{
+                video.controls = false;
+            }
+        }
+
+        
             video.srcObject = event.stream;
     
             var width = 250;

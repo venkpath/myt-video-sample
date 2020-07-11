@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AlertModal } from '../../components/alert-modal/alert-modal';
+import { ActivatedRoute } from '@angular/router';
+import { EncrDecrService } from '../../services/encode';
+import { UrlService } from '../../services/url.service';
+import { Subscription } from 'rxjs';
 
 export declare var RTCMultiConnection:any;
 
@@ -14,13 +18,45 @@ export class MainPage implements OnInit{
     connection = new RTCMultiConnection();
     meetingId:string;
     userName:string;
+    passwordValue:string;
     alertTitle:string;
     alertSpecial:string;
     alertMessage:string;
     showConfirmBox:boolean;
     joinDisable:boolean;
     createDisable:boolean;
-    constructor(public dialog: MatDialog) { }
+    userNameValue:Subscription;
+    constructor(private route: ActivatedRoute,public dialog: MatDialog, private EncrDecr: EncrDecrService, private service:UrlService) { 
+        
+        console.log('Called Constructor');
+        this.route.queryParams.subscribe(params => {
+            if(JSON. parse(localStorage.getItem("currentUser1"))){
+                if(params['id'] == JSON. parse(localStorage.getItem("currentUser1"))['username']
+                ||params['id'] == JSON. parse(localStorage.getItem("currentUser2"))['username']){
+                    this.userNameValue =  this.userName = params['id']  ; 
+                }else{
+                    var href = location.href+'/login';
+                    window.open('http://localhost:4200/login?returnUrl=%2F','_self')
+                    
+                }
+            }else{
+                var href = location.href+'/login';
+                window.open('http://localhost:4200/login?returnUrl=%2F','_self')
+                
+            }
+          
+
+            var rString = this.randomString(40, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+            this.meetingId = rString;
+        });
+    }
+
+    randomString(length, chars) {
+        var result = '';
+        for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+        return result;
+    }
+
     ngOnInit(){
         
         this.connection.socketURL = 'https://localhost:9001/';
@@ -95,7 +131,13 @@ export class MainPage implements OnInit{
     
         this.connection.extra.userFullName = fullName;
     
-        
+        var roomPassword = this.passwordValue;
+      if (!roomPassword || !roomPassword.replace(/ /g, '').length) {
+          this.alertBox('Please enter room password.', 'Password Box Is Empty');
+          return;
+      }
+
+      this.connection.password = roomPassword;
     
         this.createDisable = true;
     
@@ -130,7 +172,7 @@ export class MainPage implements OnInit{
     
     openCanvasDesigner() {
         
-        var href = location.href + '/meeting-screen?open=' + this.connection.isInitiator + '&sessionid=' + this.connection.sessionid + '&publicRoomIdentifier=' + this.connection.publicRoomIdentifier + '&userFullName=' + this.connection.extra.userFullName;
+        var href = location.origin + '/home/group/meeting-screen?open=' + this.connection.isInitiator + '&sessionid=' + this.connection.sessionid + '&publicRoomIdentifier=' + this.connection.publicRoomIdentifier + '&userFullName=' + this.connection.extra.userFullName;
         
         if(!!this.connection.password) {
           href += '&password=' + this.connection.password;

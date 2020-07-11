@@ -1,12 +1,13 @@
 {
   "name": "video-conference",
   "version": "0.0.0",
-   "engines": {
-   "node": "12.11.1"
-   },
   "scripts": {
-    "start": "node server.js",
-    "contrib-prerequisites": "npm install grunt@0.4.5 && npm install grunt-bump@0.7.0 && npm install grunt-cli@0.1.13 && npm install grunt-contrib-clean@0.6.0 && npm install grunt-contrib-concat@0.5.1 && npm install grunt-contrib-copy@0.8.2 && npm install grunt-contrib-uglify@0.11.0 && npm install grunt-contrib-watch@1.1.0 && npm install grunt-jsbeautifier@0.2.10 && npm install grunt-replace@0.11.0 && npm install load-grunt-tasks@3.4.0"
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -20,16 +21,14 @@
     "@angular/platform-browser": "~9.1.7",
     "@angular/platform-browser-dynamic": "~9.1.7",
     "@angular/router": "~9.1.7",
+    "@types/crypto-js": "^3.1.47",
     "peer": "^0.5.3",
     "rtcmulticonnection": "^3.7.0",
-    
-     "socket.io": "~2.3.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "webrtc-adapter": "^7.6.2",
     "zone.js": "~0.10.2"
   },
-  
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.6",
     "@angular/cli": "~9.1.6",

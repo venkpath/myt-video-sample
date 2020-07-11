@@ -29,10 +29,9 @@
             ],
             "scripts": [
               "./node_modules/rtcmulticonnection/dist/RTCMultiConnection.min.js",
-              "src/assets/js/app.js",
-              "src/assets/js/peer.js",
-              "src/assets/js/peer-client.js",
-              "src/assets/js/vue.js"
+              
+              "src/assets/js/peer.js"
+              
               
               
             ]

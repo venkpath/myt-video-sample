@@ -10,26 +10,28 @@
 <!-- Banner -->
 <section id="banner">
     <div class="inner">
-        <header>
-            <h1>Welcome to Video Conference</h1>
-        </header>
-
+        
         <div class="flex ">
 
             <div>
 
-                <input placeholder="Enter Meeting Id" id="txt-roomid" (input)="meetingId=$event.target.value"> 
+                <input disabled placeholder="Enter Meeting Id" [value]=meetingId id="txt-roomid" (input)="meetingId=$event.target.value"> 
 
             </div>
 
             <div>
 
-                <input placeholder="Enter User Name" id="txt-user-name" (input)="userName=$event.target.value">
+                <input disabled placeholder="Enter User Name" [value] = "userNameValue" id="txt-user-name" (input)="userName=$event.target.value">
+            </div>
+            <div>
+
+                <input  placeholder="Enter Password" [value] = "password" id="txt-password" (input)="passwordValue=$event.target.value">
             </div>
 
 
-
         </div>
+        
+        
         <div id="confirm-box-topper" *ngIf ="showConfirmBox"
             style="display:none;z-index:99999999;top:0;left:0;bottom:0;right:0;width:100%;height:100%;position:fixed;background:#000000ad;">
         </div>
