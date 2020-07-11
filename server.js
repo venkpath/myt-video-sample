@@ -9,7 +9,7 @@ var httpServer = require('http');
 const ioServer = require('socket.io');
 const RTCMultiConnectionServer = require('rtcmulticonnection-server');
 
-var PORT = 9001;
+var PORT = process.env.PORT || 9001;
 var isUseHTTPs = true;
 
 const jsonPath = {
@@ -261,9 +261,10 @@ if (isUseHTTPs) {
             pfx: sslKey
         };
     }
-
+console.log('createserver');
     httpApp = httpServer.createServer(options, serverHandler);
 } else {
+  console.log('createserver1');
     httpApp = httpServer.createServer(serverHandler);
 }
 
@@ -278,7 +279,7 @@ httpApp = httpApp.listen(process.env.PORT || PORT, process.env.IP || "0.0.0.0", 
 
 ioServer(httpApp).on('connection', function(socket) {
     RTCMultiConnectionServer.addSocket(socket, config);
-console.log('server1');
+
     // ----------------------
     // below code is optional
 
@@ -289,6 +290,7 @@ console.log('server1');
     }
 
     socket.on(params.socketCustomEvent, function(message) {
+      console.logt('prasanth1');
         socket.broadcast.emit(params.socketCustomEvent, message);
     });
 });
